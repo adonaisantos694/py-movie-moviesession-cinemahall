@@ -24,6 +24,8 @@ class CinemaHall(models.Model):
         return self.name
 
 
+# ... (restante do código acima permanece igual)
+
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
     cinema_hall = models.ForeignKey(
@@ -34,4 +36,7 @@ class MovieSession(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.movie.title} {self.show_time.strftime('%Y-%m-%d %H:%M:%S')}"
+        return (
+            f"{self.movie.title} "
+            f"{self.show_time.strftime('%Y-%m-%d %H:%M:%S')}"
+        )
