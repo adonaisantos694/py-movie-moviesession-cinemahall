@@ -4,9 +4,6 @@ from django.db import models
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
-    class Meta:
-        db_table = "db_movie_genre"
-
     def __str__(self) -> str:
         return self.name
 
@@ -14,9 +11,6 @@ class Genre(models.Model):
 class Actor(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-
-    class Meta:
-        db_table = "db_movie_actor"
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
@@ -28,9 +22,6 @@ class Movie(models.Model):
     actors = models.ManyToManyField(Actor, related_name="movies")
     genres = models.ManyToManyField(Genre, related_name="movies")
 
-    class Meta:
-        db_table = "db_movie"
-
     def __str__(self) -> str:
         return self.title
 
@@ -39,9 +30,6 @@ class CinemaHall(models.Model):
     name = models.CharField(max_length=255)
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
-
-    class Meta:
-        db_table = "db_movie_cinemahall"
 
     @property
     def capacity(self) -> int:
@@ -63,9 +51,6 @@ class MovieSession(models.Model):
         on_delete=models.CASCADE,
         related_name="movie_sessions"
     )
-
-    class Meta:
-        db_table = "db_movie_moviesession"
 
     def __str__(self) -> str:
         return (
